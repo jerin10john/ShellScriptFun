@@ -11,16 +11,20 @@ read opt
 
 if [ $opt -gt 0 ] && [ $opt -lt 5 ] ; then 
     if [ $opt -eq 1 ] ; then 
-        echo "1"
+        echo "File Type Count"
+        echo "Enter the file type: "
+        read ftype
+        echo "The number of $ftype files are:"
+        find . -name "*.$ftype" | wc -l
     fi 
     if [ $opt -eq 2 ] ; then 
-        echo "2"
+        echo "Switch to Executable"
     fi 
     if [ $opt -eq 3 ] ; then 
-        echo "3"
+        echo "Find Tag"
     fi 
     if [ $opt -eq 4 ] ; then 
-        echo "4"
+        echo "Backup and Delete/Restore"
     fi
 else
     echo "Invalid Input"
