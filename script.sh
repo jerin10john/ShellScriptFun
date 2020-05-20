@@ -163,7 +163,7 @@ if [ $opt -gt 0 ] && [ $opt -lt 8 ] ; then
         set - $c
 
         if [ -z ${1+x} ]; then
-            echo "No commit found with keyword \"$kw\""
+            echo "No commit found with keyword \"$\""
         else
             git checkout $1
         fi
