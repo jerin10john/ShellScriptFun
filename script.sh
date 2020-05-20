@@ -80,6 +80,42 @@ if [ $opt -gt 0 ] && [ $opt -lt 5 ] ; then
     fi 
     if [ $opt -eq 4 ] ; then 
         echo "Backup and Delete/Restore"
+        echo "Select one of the following options: "
+        echo "(1). Backup and Delete "
+        echo "(2). Restore "
+        read usel
+        if [ $usel -gt 0 ] && [ $usel -lt 3 ] ; then 
+            if [ $usel -eq 1 ] ; then 
+                if [ -d Backup ] ; then 
+                    rm -r Backup    
+                fi
+                mkdir Backup
+                touch ./Backup/restore.log
+                find .. -name '*.tmp' -print0 |
+                    while IFS= read -r -d '' line; do 
+                        f="realpath $line"
+                        cp $line ./Backup
+                        $f >>  ./Backup/restore.log
+                        rm $line
+                     done
+                echo "Backup Complete and Files Deleted"
+            fi
+            if [ $usel -eq 2 ] ; then 
+                if [ -f ./Backup/restore.log ] ; then
+                    while IFS= read -r line
+                        do
+                            sea=$(basename $line)
+                            cd Backup
+                            mv $sea $line  
+                            cd ..
+                        done < ./Backup/restore.log
+                        rm -r Backup
+                    echo "Files Restored"
+                else 
+                    echo "There is no Restore.log from!"
+                fi 
+            fi
+        fi 
     fi
 else
     echo "Invalid Input"
