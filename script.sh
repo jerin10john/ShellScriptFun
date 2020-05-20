@@ -71,6 +71,12 @@ if [ $opt -gt 0 ] && [ $opt -lt 5 ] ; then
     fi 
     if [ $opt -eq 3 ] ; then 
         echo "Find Tag"
+        echo "Enter a Find Tag: "
+        read ele
+        TagFile="$ele.log"
+        touch "$TagFile"
+        cd .. 
+        find . -name "*.py" | xargs egrep "#|$ele"  > Project01/"$TagFile"
     fi 
     if [ $opt -eq 4 ] ; then 
         echo "Backup and Delete/Restore"
