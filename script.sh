@@ -8,9 +8,10 @@ echo "(2). Switch to Excecutable"
 echo "(3). Find Tag"
 echo "(4). Backup and Delete/Restore"
 echo "(5). Git Push"
+echo "(7). Creates a new executable bash file"
 read opt
 
-if [ $opt -gt 0 ] && [ $opt -lt 6 ] ; then 
+if [ $opt -gt 0 ] && [ $opt -lt 7 ] ; then 
     if [ $opt -eq 1 ] ; then 
         echo "File Type Count"
         echo "Enter the file type: "
@@ -138,6 +139,23 @@ if [ $opt -gt 0 ] && [ $opt -lt 6 ] ; then
             echo "Invalid selection"
         fi
     fi
+    if [ $opt -eq 6 ] ; then
+        echo "Creates a new executable bash file"
+        echo "Enter the file name with the desired Extention"
+        read fname
+        if [ ! -f $fname ]; then 
+            if [[ $fname == *.sh ]] ; then 
+                touch "$fname" 
+                chmod 775 $fname
+                echo "#!/bin/bash" > $fname
+            else 
+                touch "$fname"
+                chmod 775 $fname 
+            fi
+        else 
+            echo "There is already a file that exits with the same name!" 
+        fi 
+    fi 
 else
     echo "Invalid Input"
 fi
