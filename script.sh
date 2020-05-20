@@ -10,9 +10,10 @@ echo "(4). Backup and Delete/Restore"
 echo "(5). Git Push"
 echo "(6). Creates a new executable bash file"
 echo "(7). Checkout Latest Merge"
+echo "(8). Fixme Log"
 read opt
 
-if [ $opt -gt 0 ] && [ $opt -lt 8 ] ; then 
+if [ $opt -gt 0 ] && [ $opt -lt 9 ] ; then 
     if [ $opt -eq 1 ] ; then 
         echo "File Type Count"
         echo "Enter the file type: "
@@ -158,6 +159,7 @@ if [ $opt -gt 0 ] && [ $opt -lt 8 ] ; then
         fi 
     fi 
     if [ $opt -eq 7 ] ; then 
+        echo "Checkout Latest Merge "
         kw="merge"
         c=$(git log -i --grep="$kw" -1 --oneline | head)
         set - $c
@@ -167,6 +169,19 @@ if [ $opt -gt 0 ] && [ $opt -lt 8 ] ; then
         else
             git checkout $1
         fi
+    fi 
+    if [ $opt -eq 8 ] ; then 
+        echo "FIXME log"
+        if [ -f fixme.log ] ; then 
+            rm fixme.log
+        fi 
+        touch fixme.log
+        find "./" -type f -iname "*" -not -path "./.git/*" -print0 | while IFS= read -d '' file; do
+        if tail -1 "$file" | grep -q "#FIXME"; then
+            echo "$file" >> "./fixme.log"
+        fi
+        done
+    echo "fixme.log created!"
     fi 
 else
     echo "Invalid Input"
