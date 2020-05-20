@@ -11,9 +11,10 @@ echo "(5). Git Push"
 echo "(6). Creates a new executable bash file"
 echo "(7). Checkout Latest Merge"
 echo "(8). Fixme Log"
+echo "(9). File Size List"
 read opt
 
-if [ $opt -gt 0 ] && [ $opt -lt 9 ] ; then 
+if [ $opt -gt 0 ] && [ $opt -lt 10 ] ; then 
     if [ $opt -eq 1 ] ; then 
         echo "File Type Count"
         echo "Enter the file type: "
@@ -183,6 +184,10 @@ if [ $opt -gt 0 ] && [ $opt -lt 9 ] ; then
         done
     echo "fixme.log created!"
     fi 
+    if [ $opt -eq 9 ] ; then 
+        echo "File Size list"
+       ls -RlhS | awk '{print $9 " - " $5}' 
+    fi
 else
     echo "Invalid Input"
 fi
