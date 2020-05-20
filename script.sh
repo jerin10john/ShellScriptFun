@@ -7,9 +7,10 @@ echo "(1). File Type Count"
 echo "(2). Switch to Excecutable"
 echo "(3). Find Tag"
 echo "(4). Backup and Delete/Restore"
+echo "(5). Git Push"
 read opt
 
-if [ $opt -gt 0 ] && [ $opt -lt 5 ] ; then 
+if [ $opt -gt 0 ] && [ $opt -lt 6 ] ; then 
     if [ $opt -eq 1 ] ; then 
         echo "File Type Count"
         echo "Enter the file type: "
@@ -117,6 +118,26 @@ if [ $opt -gt 0 ] && [ $opt -lt 5 ] ; then
             fi
         fi 
     fi
+    if [ $opt -eq 5 ] ; then 
+        echo "Git Push"
+        echo "Choose one of the following options:"
+        echo "(1). Commit Everything"
+        echo "(2). Commit only main files and delete test files"
+        read comc 
+        if [ $comc -gt 0 ] && [ $comc -lt 3 ]; then 
+            if [ $comc -eq 2 ]; then 
+                rm -v !("script.sh"|"README.md"|"1XA3_Project01.pdf")
+            fi
+            git add -A 
+            echo "Enter a Commit Message"
+            read cmsg
+            git commit -m"$cmsg"
+            b=$(git rev-parse --abbrev-ref HEAD)
+            git push origin $b
+        else 
+            echo "Invalid selection"
+        fi
+    fi
 else
     echo "Invalid Input"
-fi 
+fi
