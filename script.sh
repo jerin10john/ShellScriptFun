@@ -8,10 +8,11 @@ echo "(2). Switch to Excecutable"
 echo "(3). Find Tag"
 echo "(4). Backup and Delete/Restore"
 echo "(5). Git Push"
-echo "(7). Creates a new executable bash file"
+echo "(6). Creates a new executable bash file"
+echo "(7). Checkout Latest Merge"
 read opt
 
-if [ $opt -gt 0 ] && [ $opt -lt 7 ] ; then 
+if [ $opt -gt 0 ] && [ $opt -lt 8 ] ; then 
     if [ $opt -eq 1 ] ; then 
         echo "File Type Count"
         echo "Enter the file type: "
@@ -155,6 +156,17 @@ if [ $opt -gt 0 ] && [ $opt -lt 7 ] ; then
         else 
             echo "There is already a file that exits with the same name!" 
         fi 
+    fi 
+    if [ $opt -eq 7 ] ; then 
+        kw="merge"
+        c=$(git log -i --grep="$kw" -1 --oneline | head)
+        set - $c
+
+        if [ -z ${1+x} ]; then
+            echo "No commit found with keyword \"$kw\""
+        else
+            git checkout $1
+        fi
     fi 
 else
     echo "Invalid Input"
