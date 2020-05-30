@@ -1,7 +1,7 @@
 #!/bin/bash
 
 shopt -s extglob
-#list of all features 
+#list of all features  
 echo "Select 1 of the following:"
 echo "(1). File Type Count"
 echo "(2). Switch to Excecutable"

@@ -43,4 +43,4 @@ Start by running the following script from the directory where the ***script.sh*
    ### 8. Fixme Log 
    This feature searches the current directory and all the sub-directories for all files with ***"#FIXME"*** in the last line of the file. The respective files are stored in a log called ***"fixme.log"***.<br>
    ### 9. File Size List 
-   This feature lists the size of everyfile in greatest to smallest in human readable format.<br>
+   This feature lists the size of everyfile in greatest to smallest in human readable format.<br>  
